@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Lorenzzo Quevedo Mantovani">
+<meta name="dcterms.date" content="2025-10-24">
+
+<title>Zero to Reality: AlphaGo, MuZero and the Road to Real-World AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1f2d6daba7bd1a79bea505a54d6176a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="floating quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#alphago---2016-1" id="toc-alphago---2016-1" class="nav-link active" data-scroll-target="#alphago---2016-1">AlphaGo - 2016 [1]</a></li>
+  <li><a href="#alphago-zero---2017-3" id="toc-alphago-zero---2017-3" class="nav-link" data-scroll-target="#alphago-zero---2017-3">AlphaGo Zero - 2017 [3]</a></li>
+  <li><a href="#alphazero---2018-4" id="toc-alphazero---2018-4" class="nav-link" data-scroll-target="#alphazero---2018-4">AlphaZero - 2018 [4]</a></li>
+  <li><a href="#muzero---2020-5" id="toc-muzero---2020-5" class="nav-link" data-scroll-target="#muzero---2020-5">MuZero - 2020 [5]</a></li>
+  <li><a href="#sampled-muzero---2021-6" id="toc-sampled-muzero---2021-6" class="nav-link" data-scroll-target="#sampled-muzero---2021-6">Sampled MuZero - 2021 [6]</a></li>
+  <li><a href="#muzero-unplugged---2021-7" id="toc-muzero-unplugged---2021-7" class="nav-link" data-scroll-target="#muzero-unplugged---2021-7">MuZero Unplugged - 2021 [7]</a></li>
+  <li><a href="#stochastic-muzero---2022-8" id="toc-stochastic-muzero---2022-8" class="nav-link" data-scroll-target="#stochastic-muzero---2022-8">Stochastic MuZero - 2022 [8]</a></li>
+  <li><a href="#efficientzero---2021-2024-9" id="toc-efficientzero---2021-2024-9" class="nav-link" data-scroll-target="#efficientzero---2021-2024-9">EfficientZero - 2021 / 2024 [9]</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Zero to Reality: AlphaGo, MuZero and the Road to Real-World AI</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Lorenzzo Quevedo Mantovani </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 24, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="figures/timeline.png" alt="Timeline of AlphaZero and MuZero Variants" style="max-width:100%;height:auto;"></p>
+<p><em>Figure 1: Evolution of MuZero and its successors from 2016–2024.</em></p>
+<p>From defeating world champions in Go to tackling more general applications, the journey from AlphaGo to MuZero and its variants is a fascinating one. This post offers a concise overview of how these methods evolved, what sets them apart, and the challenges they aim to solve. Along the way, we’ll look at AlphaGo Zero, AlphaZero, MuZero, and their successors — Sampled, Unplugged, Stochastic, and EfficientZero — that pushed AI from zero-sum board games into stochastic and uncertain “real-world” environments.</p>
+<section id="alphago---2016-1" class="level2">
+<h2 class="anchored" data-anchor-id="alphago---2016-1">AlphaGo - 2016 [1]</h2>
+<p>Go has around <span class="math inline">\(250^{150}\)</span> possible moves. Iterating over all possibilities to find an optimal policy is unfeasible. Instead, algorithms use some flavor of tree-search-based methods with additional handcrafted heuristics. Nevertheless, the issue of how to efficiently explore the tree remains. The innovation behind AlphaGo is to combine <a href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search">MCTS</a> [1] with policy and value networks to obtain a very efficient tree search. But how is that achieved?</p>
+<p>AlphaGo has a combination of policies and value networks that estimate the action distribution for a given state and the expected game outcome. Initially, a policy is trained in a supervised manner (with 30 million positions), <span class="math inline">\(p_\sigma(a|s)\)</span>, which tries to predict expert moves. A smaller policy, <span class="math inline">\(\pi_r(a|s)\)</span>, is also trained with the goal of providing much faster evaluations for rollout (2 <span class="math inline">\(\mu\text{s}\)</span> against 3ms according to the authors). Then, a new policy <span class="math inline">\(\pi_p\)</span> is initialized with the same weights as <span class="math inline">\(\pi_\sigma\)</span>, which is used for self-play with randomly selected previous versions of the policy. <span class="math inline">\(\pi_p\)</span> ended up winning 80% of the games against <span class="math inline">\(\pi_\sigma\)</span>. The gradient used to train <span class="math inline">\(\pi_p\)</span> follows:</p>
+<p><span class="math display">\[
+\Delta p \propto \frac{\partial \pi_p(a|s)}{\partial p}z
+\]</span></p>
+<p>With the policies networks trained, the value network, <span class="math inline">\(v_\theta(s)\)</span>, was obtained by predicting the outcome of the games, <span class="math inline">\(z\)</span>, played by <span class="math inline">\(\pi_p\)</span>. To prevent overfitting, 30M positions were sampled from different games played with self-play. The gradient used was:</p>
+<p><span class="math display">\[
+\Delta \theta \propto \frac{\partial v_\theta(s)}{\partial \theta}(z-v_\theta(s))
+\]</span></p>
+<p><img src="figures/0_AlphaGo/Fig_1_a.png" alt="Timeline of AlphaZero and MuZero Variants" style="max-width:100%;height:auto;"></p>
+<p><em>Figure 2. AlphaGo training pipeline. Figure 1.a from [1].</em></p>
+<p>Then, the trained policies were combined with MCTS. Starting from the root node, each simulation will select actions based on</p>
+<p><span class="math display">\[
+\begin{split}
+a_t &amp;= \text{argmax}_a(Q(s_t,a) + u(s_t,a)) \\
+u(s,a) &amp; \propto \frac{P(s,a)}{1+N(s,a)}
+\end{split}
+\]</span></p>
+<p>where <span class="math inline">\(P(s,a)=p_\sigma(a|s)\)</span>. (instead of <span class="math inline">\(\pi_p\)</span>). When a leaf node is reached, <span class="math inline">\(s_L\)</span>, the value network is called to provide an estimate of the outcome and the faster <span class="math inline">\(\pi_r\)</span> is used to perform a rollout with outcome <span class="math inline">\(z_L\)</span>. The value of the state is then obtained by combining both based on a parameter <span class="math inline">\(\lambda\)</span>:</p>
+<p><span class="math display">\[
+V(s_L) = (1-\lambda)v_\theta(S_l)+\lambda z_L
+\]</span></p>
+<p>After reaching the leaf state, the action value estimation and the visit count are updated with:</p>
+<p><span class="math display">\[
+\begin{split}
+N(s,a) &amp; = \sum_{i=1}^n 1(s,a,i) \\
+Q(s,a) &amp; = \frac{1}{N(s,a)}\sum_{i=1}^n 1(s,a,i)V(s_L^i)
+\end{split}
+\]</span></p>
+<p>The action with the highest count in the root node is used in the game.</p>
+<p>Go’s invariance under reflection and rotation was explored during the networks’ training and MCTS. For example, the value of a given state is computed from the average of that state after undergoing all eight possible positions. During MCTS, one of the eight possibilities for a given state was sampled and used with <span class="math inline">\(v_\theta\)</span> and <span class="math inline">\(\pi_\sigma\)</span> in the leaf node.</p>
+<p>The network architecture for the policy function contains an input layer (<span class="math inline">\(19\times 19\times 48\)</span>) followed by 12 hidden layers, which pad the previous hidden layer output into a <span class="math inline">\(21\times 21\)</span> image with 192 filters and apply a ReLU. Then, a softmax function is applied to one last convolutional layer, outputting the action probabilities. The value network is similar, with an additional hidden layer, and two last fully-connected layers, the first with 256 with ReLU units and the second a linear layer with a tanh function that outputs the value for the given state.</p>
+<p>AlphaGo was tested against other Go programs, winning 99.8% of the matches. More interestingly, a distributed version of AlphaGo (which used more computing power) competed with <a href="https://en.wikipedia.org/wiki/Fan_Hui">Fan Hui</a>, <a href="https://en.wikipedia.org/wiki/AlphaGo_versus_Fan_Hui">winning 5-0</a>! After defeating Fan, the next challenge was going against <a href="https://en.wikipedia.org/wiki/Lee_Sedol">Lee Sedol</a>. To do so, an “intermediate” version between AlphaGo and AlphaGo Zero was created, referred to as AlphaGo Lee. AlphaGo Lee’s value function was obtained from AlphaGo self-play in an iterative process. Larger value and policy networks were also used, with 12 convolutional layers of 256 planes. During the game, many plays were remarkable (move 37, for example); a full documentary of AlphaGo, including the match with Lee is <a href="https://www.youtube.com/watch?v=WXuK6gekU1Y">available on YouTube</a>.</p>
+<div style="text-align: center;">
+<p><img src="figures/0_AlphaGo/Fig_4_a.png" alt="Timeline of AlphaZero and MuZero Variants" style="max-width:50%;height:auto;"></p>
+</div>
+<p><em>Figure 3. AlphaGo performance against other algorithms. Figure 4.a from [1].</em></p>
+<p>A notable comparison made by the authors was studying AlphaGo’s performance when setting <span class="math inline">\(\lambda=0\)</span> (only uses <span class="math inline">\(v_\theta\)</span> on leaf nodes) or <span class="math inline">\(\lambda=1\)</span> (only uses rollout with <span class="math inline">\(\pi_r\)</span>). The best result was obtained by setting <span class="math inline">\(\lambda=0.5\)</span>. This brings one of the questions addressed by its more powerful version, AlphaGo Zero: Can we remove rollouts?</p>
+</section>
+<section id="alphago-zero---2017-3" class="level2">
+<h2 class="anchored" data-anchor-id="alphago-zero---2017-3">AlphaGo Zero - 2017 [3]</h2>
+<p>Given AlphaGo’s performance, the next question was: could an even more general algorithm learn entirely through self-play? AlphaGo Zero eliminates the initial supervised learning on expert data, learning from scratch (starting <em>tabula rasa</em>, as described by the authors) and without handcrafted features. The main changes compared to AlphaGo (and AlphaGo Lee) are:</p>
+<ul>
+<li>No experience generated by experts to initialize training;</li>
+<li>No handcrafted extra features as input, only the position of the pieces;</li>
+<li>Single network that predicts both the value function and policy, <span class="math inline">\((\mathbf{p}, v)=f_\theta\)</span>;</li>
+<li>No rollouts in the tree search, using only the value function returned by <span class="math inline">\(f_\theta\)</span>;</li>
+</ul>
+<p>Still, AlphaGo Zero has perfect knowledge of the game rules, which prevents illegal moves in the MCTS. Go’s invariance is also explored to improve the tree search.</p>
+<p>The <span class="math inline">\(f_\theta\)</span> network contains 20 residual blocks, each containing convolution layers, batch normalization, ReLU activations, and skipped connections. The output is connected to two heads, with the policy head having a convolution and fully-connected layers, and the value head having a convolution and two fully-connected layers. The loss function is:</p>
+<p><span class="math display">\[
+l=(z-v)^2-\pi\text{log}\mathbf{p}+c||\theta||^2
+\]</span></p>
+<p>where <span class="math inline">\(c||\theta||^2\)</span> is a regularization term.</p>
+<p>Surprisingly, even without expert data, it surpassed AlphaGo Lee after 36 hours of training (which was trained for weeks). After 72 hours, it won all 100 games against AlphaGo Lee using a fraction of the compute cost (4 TPUs vs 48 TPUs).</p>
+<div style="text-align: center;">
+<p><img src="figures/1_AlphaGoZero/Fig_3_a.png" alt="AlphaGo Zero performance comparison" style="max-width:50%;height:auto;"></p>
+</div>
+<p><em>Figure 4. AlphaGo Zero performance comparison. Figure 3.a from [3].</em></p>
+</section>
+<section id="alphazero---2018-4" class="level2">
+<h2 class="anchored" data-anchor-id="alphazero---2018-4">AlphaZero - 2018 [4]</h2>
+<p>AlphaZero steps towards of a more general algorithm by being capable of playing not only Go but also Chess and Shogi. As indicated by the authors, the main differences with respect to the previous algorithms are: - Does not exploit the symmetry in Go to augment training data or during the tree search; - Uses the latest policy for self-play instead of the previous best.</p>
+<p>The same network architecture and hyperparameters from AlphaGo Zero are used. Although being more general, AlphaZero achieved a similar performance to AlphaGo Zero. Interestingly, it surpassed Stockfish (2016 TCEC world champion program) after 4 hours of training in Chess and Elmo (2017 CSA world champion program) after 2 hours in Shogi.</p>
+<p><img src="figures/2_AlphaZero/Fig_1.png" alt="AlphaZero performance in Chess, Shogi, and Go" style="max-width:100%;height:auto;"></p>
+<p><em>Figure 5. AlphaZero performance in Chess, Shogi, and Go. Figure 1 from [4].</em></p>
+</section>
+<section id="muzero---2020-5" class="level2">
+<h2 class="anchored" data-anchor-id="muzero---2020-5">MuZero - 2020 [5]</h2>
+<p>Despite the advances presented in AlphaZero, which requires no supervised training or handcrafted encodings, a simulator is still needed to perform the MCTS. When selecting an action <span class="math inline">\(a\)</span>, the simulator is called to return the next state, <span class="math inline">\(s'\)</span>. MuZero came to change this requirement by having an internal model of the environment, which it also learns during training. This brings the interesting question: what matters for learning in the environment? Should the model focus on specific features or represent the original environment as closely as possible?</p>
+<p>To address that, MuZero plans on latent spaces instead of the history of observations. To do so, it has two new functions, the representation function <span class="math inline">\(s^0=h_\theta(0_1, \cdots,o_t)\)</span>, and the dynamics function <span class="math inline">\(r, s' = f_\theta(s, a)\)</span>. Both are represented by DNNs.</p>
+<p>The representation function maps the observation to the state. Still, there is no requirement on how well you can reverse the operation and reconstruct the original observation from the latent state. This means that only the most critical features for learning are extracted. Notably, once the root node state is obtained using <span class="math inline">\(h_\theta\)</span>, all the tree search is conducted in the latent state. The internal model of the world is obtained by the dynamics function, which outputs an estimated reward <span class="math inline">\(r\)</span> and next state <span class="math inline">\(s\)</span> from the current state and action, such that <span class="math inline">\(r, s' = f_\theta(s, a)\)</span>. Therefore, MuZero has a total of three functions:</p>
+<ul>
+<li>Representation function: <span class="math inline">\(s^0 = h_θ(o^0)\)</span> — encodes the observation history into a compact latent state.</li>
+<li>Dynamics function: <span class="math inline">\((s', r) = g_θ(s, a)\)</span> — predicts the next latent state and immediate reward given a state and action.</li>
+<li>Prediction function: <span class="math inline">\((p^k, V) = f_θ(s^k)\)</span> - produces a policy distribution and scalar value from a latent state.</li>
+</ul>
+<p>The total loss function used is</p>
+<p><span class="math display">\[
+l_\text{MuZero} = \sum_{k=0}^Kl_P(\pi_{t+k}, p_t^k) + \sum_{k=0}^K l^v(z_{t+k}, v_t^k) + \sum_{k=1}^K l^r(u_{t+k}, r_t^k) + c||\theta||^2
+\]</span></p>
+<p>where <span class="math inline">\(\pi\)</span> is the action distribution at the root node returned from the MCTS, <span class="math inline">\(z\)</span> is the game’s output (win, lose, or draw for zero-sum games), and <span class="math inline">\(u\)</span> the reward at each step. Note that neither the state returned by the representation nor the encoder appears explicitly in the loss.</p>
+<p><img src="figures/3_MuZero/Fig_1.png" alt="Illustration of MuZero tree search (a), interaction with the environment (b), and training with unrolled experience (c)." style="max-width:100%;height:auto;"></p>
+<p><em>Figure X. Illustration of MuZero tree search (a), interaction with the environment (b), and training with unrolled experience (c). Figure 1 from [5].</em></p>
+<p>The results obtained by MuZero are similar to those from AlphaZero in Chess and Shogi, and slightly better in Go. The impressive part of the results is that the algorithm is capable of such high performance without having a simulator available for the tree search, using its learned model instead.</p>
+<p>An interesting aspect of having the dynamics function returning <span class="math inline">\(r\)</span> is that MuZero can be applied to environments with intermediate rewards, not only at the end. This significantly extends MuZero’s applicability, moving from only zero-sum games (such as Chess, Go, and Shogi) to more general environments, such as Atari Games! The authors report that MuZero achieved SOTA in 57 games.</p>
+<p><img src="figures/3_MuZero/Fig_2.png" alt="MuZero performance in Chess, Shogi, Go, and Atari. Comparison against AlphaZero in zero-sum games and R2D2 in Atari" style="max-width:100%;height:auto;"></p>
+<p><em>Figure 6. MuZero performance in Chess, Shogi, Go, and Atari. Comparison against AlphaZero in zero-sum games and R2D2 in Atari. Figure 2 from [5].</em></p>
+<p>Despite high performance, one caveat is the high computation cost for training. Board games used 16 third-generation TPUs for training and 1,000 for self-play, while 8 TPUs were used for training and 32 for self-play in the Atari case. The authors addressed this limitation by introducing the Reanalyze technique, which improves the algorithm’s sample efficiency. Reanalyze works by re-running MCTS on older data to obtain new target policies and values for the loss function.</p>
+<p>In short, MuZero advanced by not requiring a simulator while preserving performance and being applicable not only to zero-sum games. Still, some limitations remained since it only considers deterministic environments, is computationally expensive, and still doesn’t achieve zero-shot generalization as noted by the authors. As an application, a MuZero variant was used for <a href="https://deepmind.google/discover/blog/muzeros-first-step-from-research-into-the-real-world/">YouTube video compression</a>.</p>
+</section>
+<section id="sampled-muzero---2021-6" class="level2">
+<h2 class="anchored" data-anchor-id="sampled-muzero---2021-6">Sampled MuZero - 2021 [6]</h2>
+<p>MuZero achieved SOTA without a simulator but was limited to discrete-action settings. Sampled MuZero provides an important generalization, being applied to cases with large action spaces and continuous actions. Interestingly, this extension is achieved with minimal changes. More specifically, at each tree node, <span class="math inline">\(K\)</span> actions are sampled from a distribution <span class="math inline">\(\beta\)</span> during expansion, and search is conducted among those sampled actions. The equation used to select actions within the tree is</p>
+<p><span class="math display">\[
+a = \text{argmax}_a\left(Q(s,a) + c(s)\sigma\frac{\sqrt{\sum_b N(s,b)}}{1+N(s,a)}\right)
+\]</span></p>
+<p>where <span class="math inline">\(\sigma=\pi(s,a)\)</span> in MuZero. Sampled MuZero uses <span class="math inline">\(\sigma=\frac{\hat{\beta}}{\beta}\pi\)</span> with <span class="math inline">\(\hat{\beta}(a|s)=\frac{1}{K}\sum_i \delta (a-a_i)\)</span>. At the node, actions are sampled from <span class="math inline">\(\beta=\pi^{1\tau}\)</span> where <span class="math inline">\(\tau\)</span> is a temperature parameter.</p>
+<p>Sampled MuZero was tested in Go when varying <span class="math inline">\(K={15, 25, 50, 100}\)</span>, with the case <span class="math inline">\(K=100\)</span> achieving a similar performance to MuZero (which can sample all 362 available actions). A similar result was obtained when testing it with Ms.&nbsp;Pacman, where good results were obtained with <span class="math inline">\(K=3\)</span> (<span class="math inline">\(|\mathcal{A}|=18\)</span>).</p>
+<p><img src="figures/4_SampledMuZero/Fig_2.png" alt="Sampled MuZero performance in Go (left) and Ms. Pacman (right) against MuZero (all actions) with different K." style="max-width:100%;height:auto;"></p>
+<p><em>Figure 7. Sampled MuZero performance in Go (left) and Ms.&nbsp;Pacman (right) against MuZero (all actions) with different <span class="math inline">\(K\)</span>. Figure 2 from [6].</em></p>
+<p>Results were also presented for the case with a continuous action space in MuJoCo-based tasks. The algorithm networks were modified, replacing the convolutional layers with fully-connected layers, and Gaussian distributions represented the continuous actions. Interestingly, the case where the raw pixels were provided instead of the states was also tested.</p>
+</section>
+<section id="muzero-unplugged---2021-7" class="level2">
+<h2 class="anchored" data-anchor-id="muzero-unplugged---2021-7">MuZero Unplugged - 2021 [7]</h2>
+<p>MuZero Unplugged improved the Reanalyze technique introduced in MuZero, demonstrating that learning is possible without interacting with the environment (offline RL).</p>
+<p>Reanalyze uses already generated trajectories to update the networks. A given sampled state <span class="math inline">\(s_t\)</span> has as associated action <span class="math inline">\(a_t\)</span> that was played, a reward <span class="math inline">\(u_t\)</span>, the next state <span class="math inline">\(s_{t+1}\)</span>, and the state value <span class="math inline">\(z_t\)</span>. MuZero’s MCTS can be applied to <span class="math inline">\(s_t\)</span>, resulting in a <span class="math inline">\(\pi_{\text{MCTS}}\)</span> being returned, the estimate of the value <span class="math inline">\(v_t\)</span>, and the immediate reward <span class="math inline">\(r_t\)</span>. Then, the same loss used for MuZero can be used to approximate those results. The main difference is that the action returned by the tree search is not used in the environment, as the trajectory was already generated.</p>
+<p>The fraction of Reanalyze compared to environment interactions was named the Reanalyze fraction. Some uses of the Reanalyze technique are:</p>
+<ul>
+<li>Increase efficiency by reanalyzing data sampled from the previous <span class="math inline">\(N\)</span> games (a prioritized replay buffer can be used instead, exploiting “good episodes”);</li>
+<li>Offline RL;</li>
+<li>Bootstrap from demonstrations;</li>
+</ul>
+<p>No changes are made to MuZero other than the training pipeline. Interestingly, no off-policy corrections were made to the algorithms. Tested in Atari games, MuZero outperformed the DQN, IQN, and BCQ baselines. The authors also demonstrate offline RL with continuous action spaces using Sampled MuZero. The original action selected in the data from Reanalyze is added to the root node as one of the options to be explored, preventing cases where the algorithm would not sample the actions that were played. MuZero Unplugged’s performance is compared to several baselines - D4PG, BRAC, RABM, and behavioral cloning with MuZero - and achieved the best performance in most cases. MuZero Unplugged highlights how one single algorithm can achieve SOTA with both offline and online RL with continuous and discrete actions.</p>
+</section>
+<section id="stochastic-muzero---2022-8" class="level2">
+<h2 class="anchored" data-anchor-id="stochastic-muzero---2022-8">Stochastic MuZero - 2022 [8]</h2>
+<p>One of the main limitations remaining in MuZero is its applicability only to deterministic environments. To address this issue, the concept of afterstates is used, which can be understood as an intermediate state <span class="math inline">\(as_t\)</span> after applying action <span class="math inline">\(a\)</span> at state <span class="math inline">\(s_t\)</span> and before the state stochastically transitioning to other states with probability <span class="math inline">\(T(s_{t+1}|as_t)=T(s_{t+1}|a,s_t)\)</span>. In doing so, Stochastic MuZero has five functions instead of the tree in regular MuZero:</p>
+<ul>
+<li>Representation function: <span class="math inline">\(s^0 = h_θ(o^0)\)</span>;</li>
+<li>Dynamics function: <span class="math inline">\((s', r) = g_θ(as, c)\)</span> — predicts the next latent state and immediate reward given an afterstate state and chance;</li>
+<li>Prediction function: <span class="math inline">\((p^k, V) = f_θ(s^k)\)</span>;</li>
+<li>Afterstate dynamics function: <span class="math inline">\(as_t=\phi(s_t,a)\)</span> - outputs the afterstate given a state and action;</li>
+<li>Afterstate prediction function: <span class="math inline">\((\sigma_t, Q_t)=\psi(as_t)\)</span> - outputs a distribution for the chance outcomes <span class="math inline">\(c\)</span>.</li>
+</ul>
+<p>The loss function is similar to the one used for MuZero with additional terms for the chance and <span class="math inline">\(Q\)</span> predictions:</p>
+<p><span class="math display">\[
+l_{\text{SMuZero}} = l_{\text{MuZero}} + sum_{k=0}^{K-1} l^Q(z,Q) + \sum_{k=0}^{K-1}(c,\sigma) + \beta \sum_{k=0}^{K-1}||c-c^e ||^2
+\]</span></p>
+<p>where <span class="math inline">\(c^e\)</span> is the output of the variational autoencoder that is used for the chance prediction.</p>
+<p>The MCTS is also modified to account for chance and decision nodes. Decision nodes were already present in previous versions, where the agent selects an action. Chance nodes are intermediate nodes between decision nodes (Figure 8).</p>
+<p><img src="figures/6_StochasticMuZero/Fig_1.png" alt="Sampled MuZero performance in Go (left) and Ms. Pacman (right) against MuZero (all actions) with different K." style="max-width:100%;height:auto;"></p>
+<p><em>Figure 8. Stochastic MuZero MCTS (left) and training (right). Figure 1 from [8].</em></p>
+<p>The algorithm’s performance is tested in the 2048 and Backgammon games. Interestingly, Stochastic MuZero’s performance matches AlphaZero’s (which uses a simulator for the tree search). It is also noteworthy that its performance matches standard MuZero in Go with additional generalization.</p>
+<p><img src="figures/6_StochasticMuZero/Fig_2.png" alt="Stochastic MuZero against regular MuZero, AlphaZero with perfect information, and Jaskowski algorithm." style="max-width:100%;height:auto;"></p>
+<p><em>Figure 9. Stochastic MuZero against regular MuZero, AlphaZero with perfect information, and Jaskowski algorithm. Figure 2 from [8].</em></p>
+</section>
+<section id="efficientzero---2021-2024-9" class="level2">
+<h2 class="anchored" data-anchor-id="efficientzero---2021-2024-9">EfficientZero - 2021 / 2024 [9]</h2>
+<p>EfficientZero aims to make MuZero more sample-efficient by addressing three points that hurt sample efficiency.</p>
+<p>In MuZero Reanalyze, <span class="math inline">\(z\)</span> is computed using a trajectory already played and not representative of the current algorithm. To mitigate this issue, the authors suggest applying the MCTS to the last state of the Reanalyze unrolling to obtain a better estimate of that value. In practice, <span class="math inline">\(z_t=\sum_i^{l-1}\gamma^i u_{t+i} + \gamma^l v_{t+l}^{\text{MCTS}}\)</span> instead of <span class="math inline">\(z_t=\sum_i^{k-1}\gamma^i u_{t+i} + \gamma^k v_{t+k}\)</span> where <span class="math inline">\(v^{\text{MCTS}}\)</span> is returned by the new tree search and <span class="math inline">\(l\)</span> can change depending on how old the data is.</p>
+<p>MuZero doesn’t explicitly account for the prediction of the next state <span class="math inline">\(s'\)</span> in the loss, which can lead to mismatches. The authors add an extra loss term to help match the predicted state $_{t+1} (obtained by applying action <span class="math inline">\(a\)</span> at state <span class="math inline">\(s_t\)</span>, which is obtained from the history <span class="math inline">\(o_t\)</span>) to <span class="math inline">\(s_{t+1}\)</span> (obtained directly from history <span class="math inline">\(o_{t+1}\)</span>).</p>
+<p>The estimation of the action values, <span class="math inline">\(Q(s_t,a)\)</span> can suffer from compounding errors. Instead of using the predicted rewards, <span class="math inline">\(r_t\)</span>, such that <span class="math inline">\(Q(s_t,a)=\sum_{i=0}^{k-1}\gamma^i r_{t+i} + \gamma^k v_{t+k}\)</span>, a value prefix <span class="math inline">\(G=m(s_t, \hat{s}_{t+1}, \cdots, \hat{s}_{t+k-1})\)</span>, returned by a trained LSTM <span class="math inline">\(m\)</span>, such that <span class="math inline">\(Q(s_t,a)=G + \gamma^k v_{t+k}\)</span>.</p>
+<p>Among their results, the authors demonstrate that EfficientZero achieves super-human performance in the Atari 100k benchmark with only 2 hours of real-time gameplay, also surpassing other baseline algorithms.</p>
+<p>A newer version, EfficientZero V2 [10], applies extra modifications to its predecessor and accommodates continuous domains. The method also achieved SOTA with 2 hours of real-time gameplay. The authors made the code available on GitHub for the <a href="https://github.com/YeWR/EfficientZero">first</a> and <a href="https://github.com/Shengjiewang-Jason/EfficientZeroV2">second</a> versions.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References:</h2>
+<p>[1] M. J. Kochenderfer, T. A. Wheeler, and K. H. Wray, Algorithms for decision making. Cambridge, Massachusetts: The MIT Press, 2022.</p>
+<p>[2] D. Silver et al., “Mastering the game of Go with deep neural networks and tree search,” Nature, vol.&nbsp;529, no. 7587, pp.&nbsp;484–489, Jan.&nbsp;2016, doi: 10.1038/nature16961.</p>
+<p>[3] D. Silver et al., “Mastering the game of Go without human knowledge,” Nature, vol.&nbsp;550, no. 7676, pp.&nbsp;354–359, Oct.&nbsp;2017, doi: 10.1038/nature24270.</p>
+<p>[4] D. Silver et al., “A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play,” Science, vol.&nbsp;362, no. 6419, pp.&nbsp;1140–1144, 2018, doi: 10.1126/science.aar6404.</p>
+<p>[5] J. Schrittwieser et al., “Mastering Atari, Go, chess and shogi by planning with a learned model,” Nature, vol.&nbsp;588, no. 7839, pp.&nbsp;604–609, Dec.&nbsp;2020, doi: 10.1038/s41586-020-03051-4.</p>
+<p>[6] T. Hubert, J. Schrittwieser, I. Antonoglou, M. Barekatain, S. Schmitt, and D. Silver, “Learning and Planning in Complex Action Spaces,” in Proceedings of the 38th International Conference on Machine Learning, M. Meila and T. Zhang, Eds., in Proceedings of Machine Learning Research, vol.&nbsp;139. PMLR, July 2021, pp.&nbsp;4476–4486. [Online]. Available: https://proceedings.mlr.press/v139/hubert21a.html</p>
+<p>[7] J. Schrittwieser, T. Hubert, A. Mandhane, M. Barekatain, I. Antonoglou, and D. Silver, “Online and offline reinforcement learning by planning with a learned model,” in Proceedings of the 35th International Conference on Neural Information Processing Systems, in NIPS ’21. Red Hook, NY, USA: Curran Associates Inc., 2021.</p>
+<p>[8] I. Antonoglou, J. Schrittwieser, S. Ozair, T. K. Hubert, and D. Silver, “Planning in Stochastic Environments with a Learned Model,” in International Conference on Learning Representations, 2022. [Online]. Available: https://openreview.net/forum?id=X6D9bAHhBQ1</p>
+<p>[9] W. Ye, S. Liu, T. Kurutach, P. Abbeel, and Y. Gao, “Mastering Atari Games with Limited Data,” in Advances in Neural Information Processing Systems, M. Ranzato, A. Beygelzimer, Y. Dauphin, P. S. Liang, and J. W. Vaughan, Eds., Curran Associates, Inc., 2021, pp.&nbsp;25476–25488. [Online]. Available: https://proceedings.neurips.cc/paper_files/paper/2021/file/d5eca8dc3820cad9fe56a3bafda65ca1-Paper.pdf</p>
+<p>[10] S. Wang, S. Liu, W. Ye, J. You, and Y. Gao, “EfficientZero V2: mastering discrete and continuous control with limited data,” in Proceedings of the 41st International Conference on Machine Learning, in ICML’24. Vienna, Austria: JMLR.org, 2024.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

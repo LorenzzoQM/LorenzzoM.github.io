@@ -1,0 +1,15 @@
+project:
+  type: website
+
+format:
+  html:
+    theme: flatly       # A clean light theme from Bootswatch
+    toc: true            # Adds a table of contents
+    toc-location: left
+    number-sections: false
+    smooth-scroll: true
+    highlight-style: github
+    code-fold: false
+    code-line-numbers: false
+    css: styles.css      # Optional custom CSS (see below)
+    fig-align: center
