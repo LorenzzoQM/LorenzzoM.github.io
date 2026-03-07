@@ -1,0 +1,104 @@
+---
+title: "Research"
+date-modified: ""
+---
+
+My research focuses on enabling **autonomous decision-making for aerospace systems** using reinforcement learning, planning, and simulation-based evaluation.  The projects below highlight the main directions of my work.
+
+---
+
+## Autonomous Earth-Observing Satellites
+
+Agile Earth-observing satellites (AEOS) provide crucial information about Earth. Creating a schedule of when to observe each target is a fundamental step in the operation of AEOS. Traditional scheduling tools tend to be slow or brittle to initial conditions, preventing fast-retasking and on-board planning.  
+
+My research investigates deep reinforcement learning approaches with potential to enable satellites to make on-board real-time decisions while accounting for limited onboard resources, stochastic environmental conditions (such as weather), and safety constraints.
+
+Key components of this work include:
+
+### Shielded Reinforcement Learning
+
+To guarantee safe spacecraft operations, we integrate shield mechanisms with deep reinforcement learning policies. These shields prevent the agent from selecting actions that would lead to unsafe spacecraft states, ensuring that learning-based controllers respect mission constraints.
+
+Related work:
+
+- [Safety and Performance Considerations in Shielded Autonomous Spacecraft Tasking](publications.qmd#shielded-drl-JAIS-2026)
+- [Shielding Against the Unsafe: Evaluation of Shielded Deep Reinforcement Learning Training Approaches for Autonomous Spacecraft](talks-media.qmd#shielded-drl-GNC-2026)
+- [Performance Evaluation of Shielded Neural Networks for Autonomous Agile Earth Observing Satellites](talks-media.qmd#shielded-drl-IWPSS-2025)
+
+---
+
+### Training Environment Enhancements for Robust Policies
+
+Training reinforcement learning agents in realistic space missions environments can be challenging due to short episodes with few safety-relevant events to learn from.
+
+To address this, we investigate training environment enhancements such as curriculum learning, gradually increasing task difficulty to improve policy robustness.
+
+Related work:
+
+- [Improving Robustness of Autonomous EarthObserving Spacecraft Using Training Environment Enhancements](publications.qmd#training-enhancements-JAIS-2026)
+- [Improving Robustness of Autonomous Spacecraft Scheduling Using Curriculum Learning](talks-media.qmd#curriculum-GNC-2025)
+
+---
+
+### Responding to Cloud Coverage Uncertainty
+
+:::: {.columns .project-columns}
+::: {.column width="35%"}
+{{< video https://www.youtube.com/watch?v=MlWVIi0kYlE >}}
+:::
+::: {.column width="65%"}
+Earth observation missions must account for cloud coverage, which can prevent targets from being successfully imaged. 
+
+We study how leveraging different observations (weather information available to the agent) and reward functions affect policy performance in environments with weather uncertainty.
+
+:::
+
+::::
+
+Related work:
+
+- [Deep Reinforcement Learning for Satellite Autonomy with Cloud Coverage Uncertainty](talks-media.qmd#clouds-ASC-2025)
+
+---
+
+## Multi-Agent Autonomous Systems
+
+Future Earth-observation missions increasingly rely on constellations of satellites rather than single spacecraft. Coordinating these systems introduces challenges in communication, distributed decision-making, and resource allocation.
+
+We proposed the intent-sharing mechanism, which enables scalable multi-agent coordination, using policies trained in single-agent environments and leveraging minimal communication to create collaboration.
+
+Related work:
+
+- [Scalable Multi-Agent Earth Observation Tasking with Single-Agent Policies](talks-media.qmd#intent-JAIS-2026)
+- [Intent Sharing for Emergent Collaboration in Autonomous Earth Observing Constellations](talks-media.qmd#intent-GNC-2024)
+
+---
+
+## Adversarial Systems
+
+Autonomous systems must often operate in environments where other agents are present and which opposite goals, leading to adversarial situations. This research direction investigates reinforcement learning approaches for pursuit–evasion scenarios.
+
+### Capture the Satellite Challenge
+
+As part of the AIAA SciTech Capture the Satellite Challenge, our team employed learning-based methods for a competitive satellite pursuit-evasion scenario.
+
+The approach combined reinforcement learning with high-fidelity physics-based simulation to learn effective pursuit strategies.
+
+**Result:**  
+Second Place — Capture the Satellite Challenge, AIAA SciTech Forum (2026)
+
+Related links:
+
+- [CU Boulder article](https://www.colorado.edu/aerospace/cu-boulder-team-earns-second-capture-satellite-challenge)  
+- [Aerospace America coverage](https://aerospaceamerica.aiaa.org/institute/gotcha-students-capture-malfunctioning-satellite-in-spacecraft-control-exercise/)
+
+---
+
+## Software and Simulation Tools
+
+Many of these projects rely on high-fidelity simulation environments and large-scale training pipelines.
+
+Relevant software:
+
+- [Basilisk](https://github.com/AVSLab/basilisk) — high-fidelity spacecraft simulation framework  
+- [BSK-RL](https://github.com/AVSLab/bsk_rl) — reinforcement learning environments for satellite tasking

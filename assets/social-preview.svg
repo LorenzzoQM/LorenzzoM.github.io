@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Lorenzzo Mantovani</title>
+  <desc id="desc">Social preview image for personal website.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fbff"/>
+      <stop offset="100%" stop-color="#e9f1fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="72" y="72" width="1056" height="486" rx="20" fill="#ffffff" stroke="#d7e2ee"/>
+  <text x="120" y="250" font-family="Arial, sans-serif" font-size="62" font-weight="700" fill="#102234">Lorenzzo Mantovani</text>
+  <text x="120" y="320" font-family="Arial, sans-serif" font-size="36" fill="#1f4f73">Aerospace Engineering and Reinforcement Learning</text>
+  <text x="120" y="390" font-family="Arial, sans-serif" font-size="28" fill="#46617a">Research, publications, talks, and technical notes</text>
+</svg>

@@ -1,0 +1,172 @@
+---
+title: "Publications"
+description: "Journal and conference publications, posters, and technical reports."
+toc: true
+date-modified: ""
+---
+
+For the most up-to-date list, see my [Google Scholar](https://scholar.google.com/citations?user=e1Qpc9gAAAAJ&hl=pt-BR) profile.
+
+## Journal articles
+
+- Mantovani, L. Q., Schaub, H.<br>
+<span id="shielded-drl-JAIS-2026"></span>
+**Safety and Performance Considerations in Shielded Autonomous Spacecraft Tasking**<br>
+*Journal of Aerospace Information Systems* (under review)<br>
+[Code](https://avslab.github.io/bsk_rl/examples/training_with_shield.html)  
+
+- Stephenson, M., Mantovani, L. Q., Schaub, H.<br>
+<span id="intent-JAIS-2026"></span>
+**Scalable Multi-Agent Earth Observation Tasking with Single-Agent Policies**<br>
+*Journal of Aerospace Information Systems* (under review)
+
+- Mantovani, L. Q., Schaub, H. (2026)<br>
+<span id="training-enhancements-JAIS-2026"></span>
+**Improving Robustness of Autonomous EarthObserving Spacecraft Using Training Environment Enhancements**<br>
+*Journal of Aerospace Information Systems*<br>
+[DOI](https://doi.org/10.2514/1.I011697) · [Code](https://avslab.github.io/bsk_rl/examples/curriculum_learning.html)
+
+- Stephenson, M., Mantovani, L. Q., Schaub, H. (2025).<br>
+**Learning Policies for Autonomous Earth-Observing Satellite Scheduling over Semi-MDPs**<br>
+*Journal of Aerospace Information Systems*<br>
+[DOI](https://doi.org/10.2514/1.I011649)
+
+- Mantovani, L. Q., Santos, W. G., Cardoso-Ribeiro, F. L., Santos, J. C. (2022).<br>
+**Influence of thrust modulation on a satellite with flexible non-latching booms**<br>
+*Journal of the Brazilian Society of Mechanical Sciences and Engineering*<br>
+[DOI](https://doi.org/10.1007/s40430-022-03887-z)
+
+- Mantovani, L. Q., Santos, W. G., Cardoso-Ribeiro, F. L., Costa, L. E. V. L. (2022).<br>
+**Impact of non-latching booms on a nanosatellite attitude control system**<br>
+*Aerospace Science and Technology*<br>
+[DOI](https://doi.org/10.1016/j.ast.2021.107298)
+
+- Portella, K. M., Schinestzki, W. N, Sehnem, R. M., Luz, L. B., Mantovani, L. Q., et al. (2020).<br>
+**Satellite Attitude Control Using Control Moment Gyroscopes**<br>
+*Journal of Aerospace Technology and Management* (online)<br>
+[DOI](https://doi.org/10.5028/jatm.cab.1156)
+
+- Slongo, A.G., Moraes, D.D., Mantovani, L. Q., et al. (2020).<br>
+**Handling Qualities Analysis of an Unmanned Aircraft Vehicle for Agricultural Spraying**<br>
+*Journal of Aerospace Technology and Management* (online)<br>
+[DOI](https://doi.org/10.5028/jatm.cab.1150)
+
+- Slongo, A. G., Silva, A. L., Moraes, D. D., Martos, J. F. A., Mantovani, L. Q., et al. (2020).<br>
+**Preliminary Study of Launch and Orbit of a CubeSat Using a Modified VSB-30 Launcher Vehicle**<br>
+*Journal of Aerospace Technology and Management* (online)<br>
+[DOI](https://doi.org/10.5028/jatm.cab.1157)
+
+## Conference papers
+
+- Mantovani, L. Q., Schaub, H. (2026).<br>
+<span id="shielded-drl-GNC-2026"></span>
+**Shielding Against The Unsafe: Evaluation Of Shielded Deep Reinforcement Learning Training Approaches For Autonomous Spacecraft**<br>
+AAS Rocky Mountain GN&C Conference, Breckenridge, Colorado, Jan. 31– Feb. 4.<br>
+[Code](https://avslab.github.io/bsk_rl/examples/training_with_shield.html)
+
+- Mantovani, L. Q., Schaub, H. (2025).<br>
+<span id="shielded-drl-IWPSS-2025"></span>
+**Performance Evaluation of Shielded Neural Networks for Autonomous Agile Earth Observing Satellites**<br>
+International Workshop on Planning & Scheduling for Space, Toulouse, France, April 28–30.
+
+- Mantovani, L. Q., Schaub, H. (2025).<br>
+**Improving Robustness of Autonomous Spacecraft Scheduling Using Curriculum Learning**<br>
+AAS Rocky Mountain GN&C Conference, Breckenridge, CO, January 31 – February 5.<br>
+[Code](https://avslab.github.io/bsk_rl/examples/curriculum_learning.html)
+
+- Stephenson, M., Mantovani, L. Q., Cheval, Q., Schaub, H. (2025).<br>
+**Quantifying The Optimality Of A Distributed Rl-Based Autonomous Earth-Observing Constellation**<br>
+AAS Rocky Mountain GN&C Conference, Breckenridge, CO, January 31 – February 5
+
+- Mantovani, L. Q., Nagano, Y., Schaub, H. (2024).<br>
+**Reinforcement Learning For Satellite Autonomy Under Different Cloud Coverage Probability Observations**<br>
+AAS Astrodynamics Specialist Conference, Broomfield, CO, Aug. 11–15.<br>
+[Code](https://avslab.github.io/bsk_rl/examples/cloud_environment.html) · [Code](https://avslab.github.io/bsk_rl/examples/cloud_environment_with_reimaging.html)
+
+- Stephenson,M.,Mantovani, L. Q.,Schaub,H.(2024).<br>
+**“Intent Sharing For Emergent Collaboration In Autonomous Earth Observing Constellations”**<br>
+AAS Rocky Mountain GN&C Conference, Breckenridge, CO, Feb. 2–7
+
+- Stephenson, M., Mantovani, L. Q., Phillips, S., Schaub, H. (2024).<br>
+**Using Enhanced Simulation Environments to Accelerate Reinforcement Learning for Long-Duration Satellite Autonomy**<br>
+AIAA Science and Technology Forum and Exposition (SciTech), Orlando, Florida, Jan. 8–12.<br>
+[DOI](https://doi.org/10.2514/6.2024-0990)
+
+- Mantovani, L. Q., Santos, W.G., Cardoso-Ribeiro, F.L.(2020).<br>
+**Vibration analysis of the CubeSat SPORT boom’s through a flexible multibody model**<br>
+Ibero-Latin American Congress on Computational Methods in Engineering (XLI CILAMCE)
+
+- Slongo, A. G., Mantovani, L. Q., Schuch, N. J., Dur˜ao, O. S. C., Mattielo-Francisco, F., Silva, A. L., Legg, A. P., Burger, E. E. (2020).<br>
+**NANOSATC-BR3 concept design using model-based systems engineering (MBSE)**<br>
+5th IAA Conference on University Satellite Missions and CubeSat Workshop, Rome, Italy
+
+- Slongo,A.G.,Moraes,D.D.,Mantovani, L.Q.,Venturini,M.S.(2019).<br>
+**Análise das qualidades de voo de uma aeronave remotamente pilotada para pulverização agrícola [Analysis of the flying qualities of a remotely piloted aircraft for agricultural spraying]**<br>
+2º Congresso Aeroespacial Brasileiro, Santa Maria, Brazil
+
+- Schinestzki, W. N., Luz, L. B., Sacco, R. R., Portella, K. M., Sehnem, R. M., Sartori, T. K., Mantovani, L. Q., Paglione, P. (2019).<br>
+**Controle de atitude de satélite utilizando giroscópios de controle de momento [Satellite attitude control using control moment gyroscopes]**<br>
+2º Congresso Aeroespacial Brasileiro, Santa Maria, Brazil
+
+- Slongo, A. G., Moraes, D. D., Mantovani, L. Q., Venturini, M. S. (2019).<br>
+**Desenvolvimento de uma aeronave remotamente pilotada para pulverização agrícola [Development of an remotely piloted aicraft for agricultural spraying]**<br>
+2º Congresso Aeroespacial Brasileiro, Santa Maria, Brazil.
+
+- Slongo, A. G., Moraes, D. D., Mantovani, L. Q., Venturini, M. S. (2019).<br>
+**Definição de requisitos de projeto para um veículo aéreo não tripulado (VANT) para pulverização agrícola [Definition of project requirements for an unmanned aircraft for agricultural spraying]**<br>
+2º Congresso Aeroespacial Brasileiro, Santa Maria, Brazil
+
+- Slongo, A. G., Moraes, D. D., Portella, K. M., Mantovani, L. Q., Venturini, M. S., Silva, A. L. (2019).<br>
+**Estudo preliminar de lançamento e órbita do CubeSat NANOSATC-BR3 utilizando o ve´ıculo lan¸cador VSB-30 modificado [Preliminary study of the launch and orbit of the NANOSATC-BR3 CubeSat using a modified VSB-30 launch vehicle]**<br>
+2º Congresso Aeroespacial Brasileiro, Santa Maria, Brazil
+
+- Mantovani, L. Q., Signor, F., Santos, K. M., Paglione, P. (2018).<br>
+**Modelagem e simulação de um sistema de controle para satélites com atuação de rodas de reação e bobinas magnéticas[Modeling and simulation of a satellite control system actuated by reaction wheels and magnetorquers]**<br>
+1º Congresso Aeroespacial Brasileiro, Foz do Iguaçu, Brazil
+
+- Portella, K. M., Moraes, D. D., Gatelli, M. L. C., Venturini, M. S., Mantovani, L. Q., et al. (2018).<br>
+**Comparação entre estratégias de controle por regulador linear quadrático e controle por mapeamento exponencial aplicado a um sistema de pêndulo invertido [Comparison between Linear Quadratic Regulator and Exponential Mapping control strategies for an inverted pendulum system]**<br>
+11th Seminar on Power Electronics and Control, Santa Maria, Brazil
+
+- Mantovani, L. Q., Marques, R. P., Muller, A., Barreto, E. X., Silva, A. L., Dur˜ao, O. S. C., et al. (2017).<br>
+**NANOSATC-BR2: 2-unit CubeSat power analysis, solar flux prediction, design and 3D printing of the flight model from the UFSM & INPE NANOSATCBR CubeSats development program**<br>
+4th IAA Conference on University Satellite Missions and CubeSat Workshop, Rome, Italy
+
+- Marques, R. P., Couto, A. P., Mantovani, L. Q., Manica, T. R., Muller, A. (2017).<br>
+**CubeSats: utilidades e aplicações na indústria aeroespacial para a defesa brasileira [CubeSats: Uses and applications in the aerospace industry for Brazilian defense]**<br>
+III Seminário Internacional de Defesa (SEMINDE), Santa Maria, Brazil
+
+- Mantovani, L. Q., Piaz, M. L., Slongo, A. G., Marques, R. P., Muller, A., et al. (2016).<br>
+**Applicable solution for optimizing critical points on nanosatellite missions – NANOSATCBR CubeSats development program**<br>
+2º IAA Latin American CubeSat Workshop, Florianópolis, Brazil
+
+## Conference posters
+
+- Mantovani, L. Q., Prats, D. H., Stephenson, M., Schaub, H. (2025).<br>
+**Enabling Spacecraft Autonomy Using Deep Reinforcement Learning**<br>
+Rocky Mountain Workshop on Control and Autonomy, Boulder, CO, July 11
+
+- Mantovani, L. Q., Santos, W. G., Cardoso-Ribeiro, F. L. (2021)<br>
+**Overview of the Impact of Flexible Non-Latching Booms on a Small Satellite During Attitude and Orbit Maneuvers**<br>
+XX Colóquio Brasileiro de Dinâmica Orbital (online), December 6–10.
+
+- Mantovani, L. Q., Santos, W. G., Cardoso-Ribeiro, F. L. (2021).<br>
+**Use of the ISS vacuum and zero-gravity environment for determining small satellites’ deployable structures parameters**<br>
+The ISS Research and Development Conference (online), August 16–18
+
+- Mantovani, L. Q., Schuch, N. J., Durão, O. S. C. (2018).<br>
+**Estudo de órbita e mecânica espacial aplicado a nanossatélites: Programa NANOSATC-BR, desenvolvimento de CubeSats [Orbit and space mechanics study applied to nanosatellites: NANOSATC-BR Program, 5 CubeSat development]**<br>
+VII Simpósio Brasileiro de Geofísica e Aeronomia, Santa Maria, Brazil, November 5–9
+
+- Mantovani, L. Q., Schuch, N. J., Durão, O. S. C., Marques, R. P., Silva, A. L. (2017).<br>
+**Estudo de órbita e mecânica espacial aplicado a nanossatélites: Programa NANOSATC-BR, desenvolvimento de CubeSats [Orbit and space mechanics study applied to nanosatellites: NANOSATC-BRProgram, CubeSat development]**<br>
+32º Jornada Acadêmica Integrada, Santa Maria, Brazil
+
+- Mantovani, L. Q., Couto, A. P., Slongo, A. G., Farias, T. T., Durão, O. S. C., Schuch, N. J. (2016).<br>
+**Otimização de recursos em missões espaciais aplicado ao projeto NANOSATCBR2 [Resource optimization in space missions applied to the NANOSATC-BR2 project]**<br>
+31º Jornada Acadêmica Integrada, Santa Maria, Brazil
+
+## Technical reports
+
+- Mantovani, L. Q.; Burger, E. E. ; Schuch, N. J. (2019). NANOSATC-BR2, Environmental Test Plan.
+- Mantovani, L. Q.; Souza, B. F. R. ; Burger, E. E. ; Schuch, N. J. (2019). Initialization instructions for the NANOSATC-BR1 engineering model.

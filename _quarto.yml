@@ -1,15 +1,70 @@
 project:
   type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - research.qmd
+    - publications.qmd
+    - talks-media.qmd
+    - blog/index.qmd
+    - blog/posts/**/*.qmd
+
+website:
+  title: "Lorenzzo Mantovani"
+  site-url: "https://lorenzzomantovani.com"
+  description: "Personal website of Lorenzzo Mantovani, aerospace engineering researcher focused on deep reinforcement learning and decision-making under uncertainty."
+  favicon: assets/favicon.svg
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: research.qmd
+        text: Research
+      - href: publications.qmd
+        text: Publications
+      - href: blog/index.qmd
+        text: Blog
+      - href: talks-media.qmd
+        text: Talks & Media
+        target: _blank
+    right:
+      - icon: mortarboard
+        href: https://scholar.google.com/citations?user=e1Qpc9gAAAAJ&hl=pt-BR
+        aria-label: Google Scholar
+        target: _blank
+      - icon: github
+        href: https://github.com/lorenzzoqm
+        aria-label: GitHub
+        target: _blank
+      - icon: linkedin
+        href: https://www.linkedin.com/in/lorenzzo-mantovani/
+        aria-label: LinkedIn
+        target: _blank
+      - icon: envelope
+        href: mailto:lorenzzo.quevedomantovani@colorado.edu
+        aria-label: Email
+
+  page-footer:
+    left: "© 2026 Lorenzzo Mantovani"
+
+  open-graph:
+    title: "Lorenzzo Mantovani"
+    description: "Aerospace engineering and deep reinforcement learning research."
+    image: assets/social-preview.svg
+  twitter-card:
+    card-style: summary_large_image
+    title: "Lorenzzo Mantovani"
+    description: "Aerospace engineering and deep reinforcement learning research."
+    image: assets/social-preview.svg
 
 format:
   html:
-    theme: flatly       # A clean light theme from Bootswatch
-    toc: true            # Adds a table of contents
-    toc-location: left
-    number-sections: false
+    theme: flatly
+    css: styles.css
+    toc: false
     smooth-scroll: true
-    highlight-style: github
-    code-fold: false
-    code-line-numbers: false
-    css: styles.css      # Optional custom CSS (see below)
-    fig-align: center
+    link-external-newwindow: true
+    date-modified: last-modified
+    canonical-url: true
+
+metadata-files: []

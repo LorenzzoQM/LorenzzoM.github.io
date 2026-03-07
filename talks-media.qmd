@@ -1,0 +1,97 @@
+---
+title: "Talks & Media"
+description: "Conference presentations, and media mentions."
+date-modified: ""
+---
+
+---
+title: "Talks & Media"
+---
+
+## Selected Presentations
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+### Shielding Against the Unsafe: Evaluation of Shielded Deep Reinforcement Learning Training Approaches for Autonomous Spacecraft{#shielded-drl-GNC-2026}
+*AAS Rocky Mountain Guidance, Navigation, and Control Conference — 2026*
+
+:::
+::: {.column width="40%"}
+{{< video https://www.youtube.com/watch?v=QIm5NNN0Keo>}}
+:::
+
+---
+
+::: {.column width="60%"}
+
+### Performance Evaluation of Shielded Neural Networks for Autonomous Agile Earth Observing Satellites{#shielded-drl-IWPSS-2025}
+*International Workshop on Planning & Scheduling for Space — 2025*
+
+:::
+::: {.column width="40%"}
+{{< video https://www.youtube.com/watch?v=WSGFGcRxNQc >}}  
+:::
+---
+
+::: {.column width="60%"}
+
+### Improving Robustness of Autonomous Spacecraft Scheduling Using Curriculum Learning{#curriculum-GNC-2025}
+*AAS Rocky Mountain Guidance, Navigation, and Control Conference — 2025*
+
+:::
+::: {.column width="40%"}
+{{< video https://www.youtube.com/watch?v=w29MCgfeeBI >}}  
+:::
+---
+
+::: {.column width="60%"}
+
+### Reinforcement Learning for Satellite Autonomy Under Different Cloud Coverage Probability Observations{#clouds-ASC-2025}
+*AAS Astrodynamics Specialist Conference — 2024*
+
+:::
+::: {.column width="40%"}
+{{< video https://www.youtube.com/watch?v=9-F0lbItkOM >}}  
+:::
+---
+
+::: {.column width="60%"}
+
+### Intent Sharing for Emergent Collaboration in Autonomous Earth Observing Constellations{#intent-GNC-2024}
+*AAS Rocky Mountain Guidance, Navigation, and Control Conference — 2024*
+
+:::
+::: {.column width="40%"}
+{{< video https://www.youtube.com/watch?v=HeSAXba-K2M >}}  
+:::
+::::
+
+For a complete list of conference publications, see the [Publications](publications.qmd) page.
+
+## Media Mentions
+
+- Second Place — Capture the Satellite Challenge, AIAA SciTech Forum (2026).  
+  [CU Boulder article](https://www.colorado.edu/aerospace/cu-boulder-team-earns-second-capture-satellite-challenge) ·
+  [Aerospace America](https://aerospaceamerica.aiaa.org/institute/gotcha-students-capture-malfunctioning-satellite-in-spacecraft-control-exercise/)
+
+- Interview about my master's research on flexible multibody satellite dynamics (2022).  
+  [CAPES article](https://www.gov.br/capes/pt-br/assuntos/noticias/bolsista-testa-satelite-financiado-pela-nasa)
+
+- Future Skills Camp — International Space Systems Engineering Competition (2020).  
+  [UFSM coverage](https://www.ufsm.br/2020/09/10/representantes-da-ufsm-destacam-se-em-competicao-internacional-de-engenharia-de-sistemas-espaciais) ·
+  [INPE coverage](https://www.gov.br/inpe/pt-br/assuntos/ultimas-noticias/na-russia-brasileiros-orientados-pelo-inpe-vencem-competicao-internacional-de-engenharia-de-sistemas-espaciais-para-pequenos-satelites-apoiada-pelos-brics)
+
+- First Place, CanSat Category — 2nd CubeDesign Latin American Competition (2019).  
+  [Competition coverage](https://www.ufsm.br/unidades-universitarias/ct/2019/08/23/equipe-da-ufsm-vence-competicao-de-nanossatelites)
+
+- Summer Course — Space Engineering Program (2018).  
+  [UFSM article](https://www.ufsm.br/midias/arco/o-espaco-e-o-limite)
+
+- First Place — Aerospace Engineering Undergraduate Admission Exam (2015).  
+  [School announcement](https://www.fw.uri.br/pt/noticias/escola-basica-e-destaque-em-vestibulares-federais-1200)
+
+- 4th Place — Rio Grande do Sul State Chemistry Olympiad (2014).  
+  [School announcement](https://www.fw.uri.br/pt/noticias/alunos-da-escola-basica-obtem-excelente-resultado-na-olimpiada-de-quimica-do-rs-1008) ·
+  [Selection for Brazilian Chemistry Olympiad](https://www.fw.uri.br/pt/noticias/alunos-da-escola-basica-sao-selecionados-para-olimpiada-brasileira-de-quimica-347)

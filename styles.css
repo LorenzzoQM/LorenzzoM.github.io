@@ -1,0 +1,101 @@
+:root {
+  --accent: #0f5d8c;
+  --text: #1f2933;
+  --muted: #5f6c7b;
+  --bg-soft: #f7f9fc;
+}
+
+body {
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.navbar {
+  border-bottom: 1px solid #e7ecf2;
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+}
+
+.navbar .nav-link[href$="/cv.pdf"] {
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  margin-left: 0.35rem;
+  padding: 0.25rem 0.8rem;
+}
+
+.navbar .nav-link[href$="/cv.pdf"]:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+#profile .about-image {
+  max-width: 220px;
+}
+
+h1, h2, h3 {
+  color: #16212e;
+}
+
+h2 {
+  border-bottom: 1px solid #edf1f7;
+  margin-top: 2rem;
+  padding-bottom: 0.35rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: #0b4a70;
+}
+
+.grid > div {
+  background: var(--bg-soft);
+  border: 1px solid #e8edf5;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.project-columns > .column:first-child {
+  padding-right: 1rem;
+}
+
+.project-columns > .column:last-child {
+  padding-left: 1rem;
+}
+
+.featured-columns > .column:first-child {
+  padding-right: 1.25rem;
+}
+
+.featured-columns > .column:last-child {
+  padding-left: 1.25rem;
+}
+
+#quarto-margin-sidebar,
+.sidebar {
+  display: none;
+}
+
+.footer {
+  border-top: 1px solid #e7ecf2;
+}
+
+@media (max-width: 768px) {
+  .navbar .nav-link[href$="/cv.pdf"] {
+    display: inline-block;
+    margin-top: 0.25rem;
+  }
+
+  .project-columns > .column:first-child,
+  .project-columns > .column:last-child,
+  .featured-columns > .column:first-child,
+  .featured-columns > .column:last-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
