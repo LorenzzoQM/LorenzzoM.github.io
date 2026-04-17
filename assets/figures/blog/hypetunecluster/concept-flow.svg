@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1200"
+   height="700"
+   viewBox="0 0 1200 700"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg18"
+   sodipodi:docname="concept-flow.svg"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview18"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.83558847"
+     inkscape:cx="637.87381"
+     inkscape:cy="347.65918"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="1512"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg18" />
+  <title
+     id="title">HypeTuneCluster Concept Flow</title>
+  <desc
+     id="desc">Diagram showing trial generation, local or Slurm execution, metric logging, and optimizer feedback loop.</desc>
+  <defs
+     id="defs3">
+    <style
+       id="style1">
+      .title { font: 700 36px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 21px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #0f172a; }
+      .small { font: 500 17px 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #334155; }
+      .pill { fill: #e2e8f0; stroke: #94a3b8; stroke-width: 2; }
+      .box { fill: #ffffff; stroke: #0f172a; stroke-width: 3; rx: 22; }
+      .boxSoft { fill: #f8fafc; stroke: #334155; stroke-width: 2.5; rx: 20; }
+      .branchA { fill: #fff7ed; stroke: #f97316; stroke-width: 3; rx: 18; }
+      .branchB { fill: #ecfeff; stroke: #0891b2; stroke-width: 3; rx: 18; }
+      .arrow { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#arrowHead); }
+      .loop { stroke: #0f766e; stroke-width: 2.5; fill: none; marker-end: url(#arrowHeadLoop); }
+    </style>
+    <marker
+       id="arrowHead"
+       markerWidth="9"
+       markerHeight="9"
+       refX="8"
+       refY="4.5"
+       orient="auto">
+      <path
+         d="M0,0 L9,4.5 L0,9 z"
+         fill="#334155"
+         id="path1" />
+    </marker>
+    <marker
+       id="arrowHeadLoop"
+       markerWidth="9"
+       markerHeight="9"
+       refX="8"
+       refY="4.5"
+       orient="auto">
+      <path
+         d="M0,0 L9,4.5 L0,9 z"
+         fill="#0f766e"
+         id="path2" />
+    </marker>
+    <linearGradient
+       id="bg"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="1">
+      <stop
+         offset="0%"
+         stop-color="#f8fafc"
+         id="stop2" />
+      <stop
+         offset="100%"
+         stop-color="#eef2ff"
+         id="stop3" />
+    </linearGradient>
+    <marker
+       id="arrowHead-9"
+       markerWidth="9"
+       markerHeight="9"
+       refX="8"
+       refY="4.5"
+       orient="auto">
+      <path
+         d="M 0,0 9,4.5 0,9 Z"
+         fill="#334155"
+         id="path1-0" />
+    </marker>
+    <marker
+       id="arrowHead-9-2"
+       markerWidth="9"
+       markerHeight="9"
+       refX="8"
+       refY="4.5"
+       orient="auto">
+      <path
+         d="M 0,0 9,4.5 0,9 Z"
+         fill="#334155"
+         id="path1-0-7" />
+    </marker>
+  </defs>
+  <rect
+     x="0"
+     y="0"
+     width="1200"
+     height="700"
+     fill="url(#bg)"
+     id="rect3" />
+  <text
+     x="600"
+     y="70"
+     text-anchor="middle"
+     class="title"
+     id="text3">HypeTuneCluster Workflow</text>
+  <rect
+     x="120"
+     y="120"
+     width="250"
+     height="110"
+     class="box"
+     id="rect4" />
+  <text
+     x="245"
+     y="165"
+     text-anchor="middle"
+     class="label"
+     id="text4">Optimizer</text>
+  <text
+     x="245"
+     y="195"
+     text-anchor="middle"
+     class="small"
+     id="text5">Optuna / PBT</text>
+  <rect
+     x="470"
+     y="120"
+     width="260"
+     height="110"
+     class="box"
+     id="rect5" />
+  <text
+     x="600"
+     y="165"
+     text-anchor="middle"
+     class="label"
+     id="text6">run_case()</text>
+  <text
+     x="600"
+     y="195"
+     text-anchor="middle"
+     class="small"
+     id="text7">Write trial_N.json</text>
+  <rect
+     x="830"
+     y="120"
+     width="250"
+     height="110"
+     class="boxSoft"
+     id="rect7" />
+  <text
+     x="955"
+     y="165"
+     text-anchor="middle"
+     class="label"
+     id="text8">Launcher</text>
+  <text
+     x="955"
+     y="195"
+     text-anchor="middle"
+     class="small"
+     id="text9">Select execution mode</text>
+  <line
+     x1="370"
+     y1="175"
+     x2="470"
+     y2="175"
+     class="arrow"
+     id="line9" />
+  <line
+     x1="730"
+     y1="175"
+     x2="830"
+     y2="175"
+     class="arrow"
+     id="line10" />
+  <rect
+     x="700"
+     y="300"
+     width="250"
+     height="120"
+     class="branchA"
+     id="rect10" />
+  <text
+     x="825"
+     y="345"
+     text-anchor="middle"
+     class="label"
+     id="text10">Local Mode</text>
+  <text
+     x="825"
+     y="375"
+     text-anchor="middle"
+     class="small"
+     id="text11">python + venv</text>
+  <rect
+     x="980"
+     y="300"
+     width="170"
+     height="120"
+     class="branchB"
+     id="rect11" />
+  <text
+     x="1065"
+     y="345"
+     text-anchor="middle"
+     class="label"
+     id="text12">Slurm</text>
+  <text
+     x="1065"
+     y="375"
+     text-anchor="middle"
+     class="small"
+     id="text13">sbatch + sacct</text>
+  <path
+     d="m 955,230 v 37.48849"
+     class="arrow"
+     id="path13"
+     sodipodi:nodetypes="cc" />
+  <path
+     d="M 954.26403,269.6964 824.46253,269.37427 825,300"
+     class="arrow"
+     id="path14"
+     sodipodi:nodetypes="ccc" />
+  <path
+     d="m 829.93299,422.74654 0.46544,112.28149 -48.03664,2.65882"
+     class="arrow"
+     id="path14-2"
+     sodipodi:nodetypes="ccc"
+     style="fill:none;stroke:#334155;stroke-width:2.5;marker-end:url(#arrowHead-9)" />
+  <path
+     d="m 1069.0667,418.43107 0.4654,161.59157 -286.49132,2.65882"
+     class="arrow"
+     id="path14-2-7"
+     sodipodi:nodetypes="ccc"
+     style="fill:none;stroke:#334155;stroke-width:2.5;marker-end:url(#arrowHead-9-2)" />
+  <path
+     d="M 955,269.6964 1064.1439,269.34989 1065,300"
+     class="arrow"
+     id="path15"
+     sodipodi:nodetypes="ccc" />
+  <rect
+     x="420"
+     y="500"
+     width="360"
+     height="120"
+     class="box"
+     id="rect15" />
+  <text
+     x="600"
+     y="545"
+     text-anchor="middle"
+     class="label"
+     id="text15">TensorBoard Logs</text>
+  <text
+     x="600"
+     y="575"
+     text-anchor="middle"
+     class="small"
+     id="text16">Read metric: reward</text>
+  <path
+     d="m 420,560 c -84.22533,0 -176.6621,10.27242 -177.40029,-50.49117 -0.74865,-61.62471 -0.0404,-189.13899 -0.5436,-278.77286"
+     class="loop"
+     id="path17"
+     sodipodi:nodetypes="csc" />
+  <text
+     x="288.40356"
+     y="579.94702"
+     class="small"
+     fill="#0f766e"
+     id="text17"
+     style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:17px;line-height:normal;font-family:'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif">Metric feedback</text>
+  <rect
+     x="78.960434"
+     y="285"
+     width="343.55109"
+     height="58.735973"
+     class="pill"
+     id="rect17" />
+  <text
+     x="250"
+     y="321"
+     text-anchor="middle"
+     class="small"
+     id="text18">One config per trial, same API everywhere</text>
+</svg>

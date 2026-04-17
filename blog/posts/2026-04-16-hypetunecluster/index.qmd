@@ -1,0 +1,127 @@
+---
+title: "Why I Built HypeTuneCluster (and Why It Is Useful)"
+author: "Lorenzzo Mantovani"
+date: 2026-04-16
+description: "A practical overview of HypeTuneCluster for running hyperparameter tuning locally or on Slurm clusters with less boilerplate."
+categories: [machine-learning, hpc, hyperparameter-tuning]
+tags: [optuna, pbt, slurm, tensorboard]
+image: /assets/figures/blog/hypetunecluster/concept-flow.svg
+draft: false
+---
+
+Hyperparameter tuning is one of those tasks that sounds simple but quickly gets messy in practice. Running one experiment is easy. Running tens or hundreds of trials, tracking each config, monitoring jobs, and collecting metrics reliably across local machines and HPC clusters is where the friction shows up.
+
+That is exactly why I created [HypeTuneCluster](https://github.com/LorenzzoQM/HypeTuneCluster): a lightweight toolkit that standardizes the repetitive parts of tuning workflows, so I can focus on model and experiment design instead of orchestration glue code.
+
+<img src="/assets/figures/blog/hypetunecluster/concept-flow.svg" alt="Concept flow showing optimizer to run_case, then local or Slurm execution, logging, and metric feedback." style="max-width:100%;height:auto;">
+
+*Figure 1: HypeTuneCluster concept flow across local and cluster execution.*
+
+## The problem I wanted to solve
+
+In most research workflows, tuning loops usually require custom scripts for:
+
+- writing trial-specific configs,
+- launching jobs locally or through a scheduler,
+- monitoring job completion,
+- reading final metrics back into the search loop.
+
+Each project tends to reimplement these pieces differently. This duplication slows experimentation and increases the chance of subtle bugs (for example, reading the wrong trial output, race conditions, or inconsistent resume behavior).
+
+## What HypeTuneCluster does
+
+At its core, HypeTuneCluster provides a single run primitive that can be reused across search methods:
+
+- Generates one JSON config per trial.
+- Launches the trial script either locally or through `sbatch`.
+- Polls job status until completion.
+- Reads TensorBoard scalars (such as `reward`) and returns them to the optimizer.
+
+The main entry point is `hypeTune.run.run.run_case()`, and the repository includes working examples for both Optuna and Population Based Training (PBT).
+
+## Why this is useful
+
+The value of the repo is not just convenience. It improves the quality and speed of experimentation in a few concrete ways.
+
+### 1. One workflow for local and cluster execution
+
+You can use the same tuning logic in both environments:
+
+- Local mode with a virtual environment path.
+- Cluster mode by omitting that path and submitting through Slurm.
+
+This reduces the "works locally but not on cluster" gap and makes it easier to transition from prototype to larger runs.
+
+### 2. Cleaner experiment traceability
+
+Each trial has explicit artifacts:
+
+- `trial_<n>.json` config,
+- corresponding logs under `logs/trial_<n>/...`,
+- metric readback from TensorBoard.
+
+That structure makes debugging and reproducibility much easier, especially when comparing many runs.
+
+### 3. Built-in monitoring and resume-friendly patterns
+
+The run loop already handles polling:
+
+- PID-based polling for local jobs,
+- `sacct`-based polling for Slurm jobs,
+- optional callback hooks for custom monitoring.
+
+For Optuna, the examples use persistent journal storage with `load_if_exists=True`, so you can resume studies naturally. The PBT example also persists state with `PBT_out.json`.
+
+### 4. Minimal assumptions about your training code
+
+HypeTuneCluster does not force a full training framework. Your training script only needs to:
+
+- read the generated trial config,
+- run the experiment,
+- write TensorBoard logs.
+
+This keeps the library lightweight and easy to integrate into existing ML codebases.
+
+## Typical usage
+
+A minimal tuning run can look like this:
+
+```python
+from pathlib import Path
+from hypeTune.run.run import run_case
+
+
+def objective(steps, values):
+    return sum(values) / len(values)
+
+
+score = run_case(
+    trial_number=0,
+    params={"learning_rate": 1e-3, "width": 32},
+    eval_function=objective,
+    path_write=Path("./configs"),
+    path_read=Path("./logs"),
+    path_script=Path("./run_script.py"),
+    path_venv=Path("./.venv"),  # remove for Slurm mode
+    read_metric="reward",
+)
+```
+
+When running on a cluster, the same flow submits jobs with `sbatch` and tracks state with `sacct`.
+
+## Who this helps most
+
+HypeTuneCluster is especially useful if you are:
+
+- iterating on RL or ML experiments with many trial runs,
+- moving between laptop-scale and HPC-scale execution,
+- using Optuna or PBT and wanting less orchestration code,
+- trying to keep experiment tracking simple and auditable.
+
+## Final thoughts
+
+The goal of HypeTuneCluster is straightforward: remove operational friction from hyperparameter tuning while preserving flexibility. By packaging the repetitive orchestration steps into a reusable workflow, it helps accelerate research cycles and reduces avoidable experiment-management errors.
+
+If this matches your workflow, check out the repository here:
+
+[https://github.com/LorenzzoQM/HypeTuneCluster](https://github.com/LorenzzoQM/HypeTuneCluster)

@@ -85,7 +85,20 @@ a:hover {
   border-top: 1px solid #e7ecf2;
 }
 
+/* Make image previews on the main blog table listing easier to read. */
+#listing-listing .listing-image img {
+  height: 96px !important;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+
 @media (max-width: 768px) {
+  #listing-listing .listing-image img {
+    height: 72px !important;
+    max-width: 150px;
+  }
+
   .navbar .nav-link[href$="/cv.pdf"] {
     display: inline-block;
     margin-top: 0.25rem;
