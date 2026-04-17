@@ -26,7 +26,6 @@ website:
         text: Blog
       - href: talks-media.qmd
         text: Talks & Media
-        target: _blank
     right:
       - icon: mortarboard
         href: https://scholar.google.com/citations?user=e1Qpc9gAAAAJ&hl=pt-BR
